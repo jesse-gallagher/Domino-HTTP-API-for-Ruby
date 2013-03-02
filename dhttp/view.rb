@@ -1,5 +1,5 @@
 module DHTTP
-  class View
+  class View < Base
     attr_reader :parent, :title, :folder, :private, :modified, :unid, :href
     
     def initialize(parent, json)

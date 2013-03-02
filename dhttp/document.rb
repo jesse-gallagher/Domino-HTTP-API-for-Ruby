@@ -1,5 +1,5 @@
 module DHTTP
-  class Document
+  class Document < Base
     attr_reader :parent, :unid, :href, :noteid, :created, :modified, :authors, :form, :items
     
     def initialize(parent, json)

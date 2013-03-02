@@ -1,5 +1,5 @@
 module DHTTP
-  class ViewEntryCollection
+  class ViewEntryCollection < Base
     attr_reader :parent, :count
     
     def initialize(parent, path)
@@ -49,5 +49,11 @@ module DHTTP
       self.each { |entry| result << yield(entry) }
       result
     end
+    def to_a
+      result = []
+      self.each { |entry| result << entry }
+      result
+    end
+    
   end
 end

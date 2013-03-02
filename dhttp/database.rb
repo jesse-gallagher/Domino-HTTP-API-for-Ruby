@@ -1,5 +1,5 @@
 module DHTTP
-  class Database
+  class Database < Base
     attr_reader :server, :path, :username, :password, :port, :ssl
     
     def initialize(args)
@@ -12,8 +12,21 @@ module DHTTP
     end
     
     def views
-      json = fetch_json("/collections")
-      json.map { |view_json| DHTTP::View.new(self, view_json) }
+      fetch_views! if @views.nil?
+      @views
+    end
+    def get_view(title)
+      fetch_views! if @views.nil?
+      @views_by_title[title]
+    end
+    
+    def to_s
+      {
+        :server => @server,
+        :path => @path,
+        :username => @username,
+        :password => @password
+      }.inspect
     end
     
     def fetch(path)
@@ -29,13 +42,17 @@ module DHTTP
       JSON fetch(path).body
     end
     
-    def to_s
-      {
-        :server => @server,
-        :path => @path,
-        :username => @username,
-        :password => @password
-      }.inspect
+    private
+    
+    def fetch_views!
+      json = fetch_json("/collections")
+      @views = []
+      @views_by_title = {}
+      json.each do |view_json|
+        view = DHTTP::View.new(self, view_json)
+        @views << view
+        @views_by_title[view.title] = view
+      end
     end
   end
 end

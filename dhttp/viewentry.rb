@@ -1,5 +1,5 @@
 module DHTTP
-  class ViewEntry
+  class ViewEntry < Base
     attr_reader :parent, :noteid, :siblings, :position, :form, :unid, :entryid, :href, :column_values
     
     def initialize(parent, json)

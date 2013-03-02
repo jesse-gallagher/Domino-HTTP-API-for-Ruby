@@ -4,6 +4,7 @@ require "net/http"
 require "time"
 require "uri"
 
+require "#{File.dirname(__FILE__)}/dhttp/base"
 require "#{File.dirname(__FILE__)}/dhttp/database"
 require "#{File.dirname(__FILE__)}/dhttp/view"
 require "#{File.dirname(__FILE__)}/dhttp/viewentry"
