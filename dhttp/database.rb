@@ -16,15 +16,17 @@ module DHTTP
       json.map { |view_json| DHTTP::View.new(self, view_json) }
     end
     
-    def fetch_json(path)
+    def fetch(path)
       uri = URI("http#{@ssl ? 's' : ''}://#{@server}:#{@port}/#{@path}/api/data#{path}")
       http = Net::HTTP.new(uri.host, uri.port)
       req = Net::HTTP::Get.new(uri.request_uri)
       unless @username.empty?
         req.basic_auth @username, @password
       end
-      res = http.request(req)
-      JSON res.body
+      http.request(req)
+    end
+    def fetch_json(path)
+      JSON fetch(path).body
     end
     
     def to_s

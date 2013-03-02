@@ -18,9 +18,7 @@ module DHTTP
       end
     end
     def entries
-     @parent.fetch_json("/collections/unid/#{@unid}?strongtype=true").map do |entry_json|
-        DHTTP::ViewEntry.new(self, entry_json)
-      end
+      ViewEntryCollection.new(self, "/collections/unid/#{@unid}?strongtype=true")
     end
   end
 end
