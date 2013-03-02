@@ -13,12 +13,12 @@ module DHTTP
     end
     
     def each_entry
-      JSON(Net::HTTP.get(@parent.server, "/#{@parent.path}/api/data/collections/unid/#{@unid}")).each do |entry_json|
+      @parent.fetch_json("/collections/unid/#{@unid}?strongtype=true").each do |entry_json|
         yield DHTTP::ViewEntry.new(self, entry_json)
       end
     end
     def entries
-      JSON(Net::HTTP.get(@parent.server, "/#{@parent.path}/api/data/collections/unid/#{@unid}")).map do |entry_json|
+     @parent.fetch_json("/collections/unid/#{@unid}?strongtype=true").map do |entry_json|
         DHTTP::ViewEntry.new(self, entry_json)
       end
     end

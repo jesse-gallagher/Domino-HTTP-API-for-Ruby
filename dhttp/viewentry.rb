@@ -18,7 +18,7 @@ module DHTTP
     end
     
     def document
-      DHTTP::Document.new(@parent.parent, JSON(Net::HTTP.get(@parent.parent.server, "/#{@parent.parent.path}/api/data/documents/unid/#{@unid}")))
+      DHTTP::Document.new(@parent.parent, @parent.parent.fetch_json("/documents/unid/#{@unid}?strongtype=true&multipart=false"))
     end
   end
 end
