@@ -1,6 +1,6 @@
 module DHTTP
   class ViewEntry < Base
-    attr_reader :parent, :noteid, :siblings, :position, :form, :unid, :entryid, :href, :column_values
+    attr_reader :parent, :noteid, :siblings, :position, :form, :unid, :entryid, :href, :read, :column_values
     
     def initialize(parent, json)
       @parent = parent
@@ -11,6 +11,7 @@ module DHTTP
       @unid = json.delete("@unid")
       @entryid = json.delete("@entryid")
       @href = json.delete("@href")
+      @read = json.delete("@read") || false
       
       json.delete("@link")
       
