@@ -9,8 +9,8 @@ module DHTTP
       @path = args[:path] or raise "Missing :path parameter"
       @username = args[:username] || ""
       @password = args[:password] || ""
-      @ssl = args[:ssl] or false
-      @port = args[:port] or (@ssl ? 443 : 80)
+      @ssl = args[:ssl] || false
+      @port = args[:port] || (@ssl ? 443 : 80)
     end
     
     def views

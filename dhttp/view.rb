@@ -12,11 +12,6 @@ module DHTTP
       @href = json["@href"]
     end
     
-    def each_entry
-      @parent.fetch_json("/collections/unid/#{@unid}?strongtype=true").each do |entry_json|
-        yield DHTTP::ViewEntry.new(self, entry_json)
-      end
-    end
     def entries
       ViewEntryCollection.new(self, "/collections/unid/#{@unid}?strongtype=true")
     end
